@@ -1,0 +1,125 @@
+import { environments } from './env.js';
+import axios from 'axios';
+const API_ENDPOINTS = {
+  singup: `/auth/signup`,
+  login: `/auth/login`,
+  xeroauth: '/xero/auth',
+  getApplications: '/applications',
+  getCashFlow: '/cash-flow'
+};
+
+export const signup = async (fullname, email, password) => {
+  let isSuccess = false;
+  try {
+    const apiPayload = {
+      email: email,
+      password: password,
+      username: fullname
+    };
+    console.log(apiPayload);
+    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.singup}`, apiPayload);
+    console.log(result.data);
+    const data = result.data;
+    if (data.status === 'success') {
+      isSuccess = true;
+    }
+    console.log(data.message);
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return isSuccess;
+};
+export const xeroAuth = async () => {
+  let isSuccess = true;
+  try {
+    await axios.get(`${environments.apiUrl}${API_ENDPOINTS.xeroauth}`);
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return isSuccess;
+};
+export const login = async (email, password) => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const apiPayload = {
+      email: email,
+      password: password
+    };
+    console.log(apiPayload);
+    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.login}`, apiPayload);
+    console.log(result.data);
+    const response_data = result.data;
+    if (response_data.status === 'success') {
+      isSuccess = true;
+      data = response_data;
+    }
+    console.log(response_data.message);
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+
+export const getConnectedApplications = async () => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getApplications}`);
+    console.log('res', result.data);
+    data = result.data;
+    isSuccess = true;
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+export const getCashFlowBarChartData = async () => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getCashFlow}`);
+    console.log('res', result.data);
+    data = result.data;
+    isSuccess = true;
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+
+// export const updatePersonality = async (apiPayload) => {
+//   let isSuccess = false;
+//   let result;
+//   let data;
+
+//   try {
+//     ({ data } = await axios.put(`${environments.apiUrl}${API_ENDPOINTS.deletePersonality}`, apiPayload));
+
+//     if (data.responseCode === 2000) {
+//       isSuccess = true;
+//       result = data.response;
+//     } else if (data.responseCode === 5000) {
+//       isSuccess = false;
+//       result = data.response;
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     isSuccess = false;
+//   } finally {
+//     return {
+//       isSuccess: isSuccess,
+//       data: result
+//     };
+//   }
+// };
