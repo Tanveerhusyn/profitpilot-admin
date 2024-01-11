@@ -3,7 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
-
+import Protected from './Protected.js';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
@@ -23,7 +23,11 @@ const Applications = Loadable(lazy(() => import('views/dashboard/applications'))
 
 const MainRoutes = {
   path: '/',
-  element: <MainLayout />,
+  element: (
+    <Protected>
+      <MainLayout />,
+    </Protected>
+  ),
   children: [
     {
       path: '/',

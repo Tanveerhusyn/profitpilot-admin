@@ -5,7 +5,10 @@ const API_ENDPOINTS = {
   login: `/auth/login`,
   xeroauth: '/xero/auth',
   getApplications: '/applications',
-  getCashFlow: '/cash-flow'
+  getCashFlow: '/cash-flow',
+  profitloss: '/profit-loss',
+  executiveSummary: '/executive-summary',
+  chat: '/chat'
 };
 
 export const signup = async (fullname, email, password) => {
@@ -87,6 +90,53 @@ export const getCashFlowBarChartData = async () => {
   let data = {};
   try {
     const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getCashFlow}`);
+    console.log('res', result.data);
+    data = result.data;
+    isSuccess = true;
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+export const getProfitLossData = async () => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.profitloss}`);
+    console.log('res', result.data);
+    data = result.data;
+    isSuccess = true;
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+export const getExecutiveSummary = async () => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.executiveSummary}`);
+
+    data = result.data;
+    isSuccess = true;
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+export const chat = async (message) => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.chat}`, {
+      message: message
+    });
     console.log('res', result.data);
     data = result.data;
     isSuccess = true;

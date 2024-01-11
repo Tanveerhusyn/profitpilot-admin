@@ -75,6 +75,7 @@ const ProfileSection = () => {
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch the logout action
+    localStorage.removeItem('user');
     navigate('/login'); // Redirect to login page
   };
   const handleToggle = () => {

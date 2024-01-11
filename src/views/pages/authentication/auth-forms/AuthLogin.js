@@ -76,6 +76,7 @@ const FirebaseLogin = ({ ...others }) => {
             console.log('RESPONE', response);
             if (response.isSuccess == true) {
               console.log('Navigating to /login', response.data);
+              localStorage.setItem('user', response.data.user);
               dispatch(loginSuccess(response.data.user));
               navigate('/');
             } else {

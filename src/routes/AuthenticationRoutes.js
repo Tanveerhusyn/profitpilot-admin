@@ -15,11 +15,11 @@ const AuthenticationRoutes = {
   element: <MinimalLayout />,
   children: [
     {
-      path: '/login',
+      path: 'login', // Removed the leading slash
       element: <AuthLogin3 />
     },
     {
-      path: '/register',
+      path: 'register', // Removed the leading slash
       element: <AuthRegister3 />
     }
   ]
