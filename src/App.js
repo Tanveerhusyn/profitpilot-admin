@@ -50,7 +50,7 @@ const DialogComponent = ({ open, handleClose }) => {
       console.log(`Already connected to ${appName}`);
       // Handle the already connected logic here
     } else {
-      window.location.href = `http://${environments.apiUrl}/${appName}/auth`;
+      window.location.href = `${environments.apiUrl}/${appName}/auth`;
     }
   };
   return (
