@@ -18,6 +18,7 @@ import { getConnectedApplications } from 'utils/services';
 // ==============================|| APP ||============================== //
 import { Dialog, DialogTitle, DialogContent, DialogActions, Card, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { environments } from 'utils/env';
 
 const CustomCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -49,7 +50,7 @@ const DialogComponent = ({ open, handleClose }) => {
       console.log(`Already connected to ${appName}`);
       // Handle the already connected logic here
     } else {
-      window.location.href = `http://localhost:5000/${appName}/auth`;
+      window.location.href = `http://${environments.apiUrl}/${appName}/auth`;
     }
   };
   return (
