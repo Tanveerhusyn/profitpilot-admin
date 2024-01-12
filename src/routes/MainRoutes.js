@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 import Protected from './Protected.js';
+import Subscription from 'views/pages/subscription/Subscription.js';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
@@ -98,7 +99,11 @@ const MainRoutes = {
     {
       path: 'Applications',
       element: <Applications />
-    }
+    },
+    {
+      path: 'Subscription',
+      element: <Subscription />
+    },
   ]
 };
 

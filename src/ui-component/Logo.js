@@ -1,6 +1,6 @@
 // material-ui
 
-import logo from '../assets/images/icons/logo.png';
+import logo from '../assets/images/icons/logomain.svg';
 /**
  * if you want to use image instead of <svg> uncomment following.
  *
@@ -23,11 +23,12 @@ const Logo = () => {
       style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
       }}
     >
-      <img src={logo} alt="Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
-      <h2 style={{ margin: '0' }}>ProfitPilot</h2>
+      <img src={logo} alt="Logo" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
+      {/* <h2 style={{ margin: '0' }}>ProfitPilot</h2> */}
     </div>
     // <svg width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     //   <path

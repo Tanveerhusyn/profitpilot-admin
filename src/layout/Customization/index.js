@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { Dialog, Fab, Grid, Avatar, Paper, Tooltip, Typography, IconButton, Divider, OutlinedInput } from '@mui/material';
 import { ThreeDots } from 'react-loader-spinner';
-import { IconAssembly, IconMicrophone, IconSend } from '@tabler/icons'; // Import the relevant Tabler Icons
+import { IconAssembly, IconSend } from '@tabler/icons'; // Import the relevant Tabler Icons
 
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { SET_BORDER_RADIUS } from 'store/actions';
@@ -14,6 +14,7 @@ import { gridSpacing } from 'store/constant';
 import { CloseOutlined } from '@mui/icons-material';
 import { chat } from 'utils/services';
 import { useLocation } from 'react-router';
+import logo from '../../assets/images/ask.svg'
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -42,7 +43,7 @@ const Customization = () => {
 
   // state - border radius
   const [borderRadius] = useState(customization.borderRadius);
-
+  const [query, setQuery] = useState('');
   const handleSendMessage = async (message) => {
     const newMessage = { user: true, message };
     setChatData((prevChat) => [...prevChat, newMessage]);
@@ -161,16 +162,29 @@ const Customization = () => {
       >
         {/* Right Chatbox */}
         <Grid item xs={12} component={Paper} elevation={3} sx={{ p: 0, borderRadius: 0, minWidth: '100%' }}>
-          <Grid container spacing={gridSpacing} sx={{ p: 2, m: 0, height: '100%', width: '100%' }}>
+          <Grid container spacing={gridSpacing} sx={{ p: 2, m: 0, height: '100%', width: '100%',overflow: 'hidden', }}>
             {/* Display active thread's history */}
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'flex-end',
+                justifyContent: 'space-between',
+                
                 alignItems: 'center',
                 minWidth: '100%'
               }}
             >
+           <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+      }}
+    >
+      <img src={logo} alt="Logo" style={{ width: '150px', height: '80px', marginRight: '10px' }} />
+      {/* <h2 style={{ margin: '0' }}>ProfitPilot</h2> */}
+    </div>
+
               <IconButton edge="end" color="inherit" onClick={handleToggle} aria-label="fullscreen" sx={{ marginRight: 2 }}>
                 <CloseOutlined />
               </IconButton>
@@ -249,9 +263,11 @@ const Customization = () => {
                 justifyContent: 'left',
                 alignItems: 'center',
                 position: 'absolute',
-                bottom: 10,
+                background:'#fff',
+                height:'100px',
+                bottom: 0,
                 zIndex: 999,
-                width: '95%',
+                width: '98%',
                 gap: 4
               }}
             >
@@ -260,6 +276,8 @@ const Customization = () => {
                 variant="outlined"
                 placeholder="Ask Profit Pilot ..."
                 fullWidth
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 sx={{
                   width: 'calc(100% - 48px)', // Adjust the width here
                   marginRight: '10px'
@@ -271,12 +289,24 @@ const Customization = () => {
                   }
                 }}
               />
-              <IconButton>
-                <IconSend />
+              <div style={{
+                minWidth:'100px',
+                height:'100px',
+                display:'flex',
+                justifyContent:'center',
+                alignItems:'center'
+
+              }}>
+                <IconButton 
+              sx={{ background: '#061A2A', color: '#000',height:'60px',width:'60px' }}
+              onClick={()=>{
+                handleSendMessage(query);
+                setQuery('')
+              }}>
+                <IconSend color="white" sx={{background:'white', color: 'white'}} />
               </IconButton>
-              <IconButton>
-                <IconMicrophone />
-              </IconButton>
+              </div>
+               
             </div>
           </Grid>
         </Grid>

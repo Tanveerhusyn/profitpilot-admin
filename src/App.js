@@ -10,6 +10,7 @@ import Routes from 'routes';
 
 // defaultTheme
 import themes from 'themes';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
