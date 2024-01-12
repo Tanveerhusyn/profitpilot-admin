@@ -11,6 +11,10 @@ const API_ENDPOINTS = {
   chat: '/chat'
 };
 
+const headers = {
+  'ngrok-skip-browser-warning': 69420
+};
+
 export const signup = async (fullname, email, password) => {
   let isSuccess = false;
   try {
@@ -20,7 +24,7 @@ export const signup = async (fullname, email, password) => {
       username: fullname
     };
     console.log(apiPayload);
-    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.singup}`, apiPayload);
+    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.singup}`, apiPayload, { headers: headers });
     console.log(result.data);
     const data = result.data;
     if (data.status === 'success') {
@@ -37,7 +41,7 @@ export const signup = async (fullname, email, password) => {
 export const xeroAuth = async () => {
   let isSuccess = true;
   try {
-    await axios.get(`${environments.apiUrl}${API_ENDPOINTS.xeroauth}`);
+    await axios.get(`${environments.apiUrl}${API_ENDPOINTS.xeroauth}`, { headers: headers });
   } catch (error) {
     console.log(error.message);
     isSuccess = false;
@@ -54,7 +58,7 @@ export const login = async (email, password) => {
       password: password
     };
     console.log(apiPayload);
-    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.login}`, apiPayload);
+    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.login}`, apiPayload, { headers: headers });
     console.log(result.data);
     const response_data = result.data;
     if (response_data.status === 'success') {
@@ -74,7 +78,7 @@ export const getConnectedApplications = async () => {
   let isSuccess = false;
   let data = {};
   try {
-    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getApplications}`);
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getApplications}`, { headers: headers });
     console.log('res', result.data);
     data = result.data;
     isSuccess = true;
@@ -89,7 +93,7 @@ export const getCashFlowBarChartData = async () => {
   let isSuccess = false;
   let data = {};
   try {
-    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getCashFlow}`);
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.getCashFlow}`, { headers: headers });
     console.log('res', result.data);
     data = result.data;
     isSuccess = true;
@@ -104,7 +108,7 @@ export const getProfitLossData = async () => {
   let isSuccess = false;
   let data = {};
   try {
-    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.profitloss}`);
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.profitloss}`, { headers: headers });
     console.log('res', result.data);
     data = result.data;
     isSuccess = true;
@@ -119,7 +123,7 @@ export const getExecutiveSummary = async () => {
   let isSuccess = false;
   let data = {};
   try {
-    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.executiveSummary}`);
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.executiveSummary}`, { headers: headers });
 
     data = result.data;
     isSuccess = true;
@@ -134,9 +138,13 @@ export const chat = async (message) => {
   let isSuccess = false;
   let data = {};
   try {
-    const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.chat}`, {
-      message: message
-    });
+    const result = await axios.post(
+      `${environments.apiUrl}${API_ENDPOINTS.chat}`,
+      {
+        message: message
+      },
+      { headers: headers }
+    );
     console.log('res', result.data);
     data = result.data;
     isSuccess = true;

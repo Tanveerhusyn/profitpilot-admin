@@ -105,6 +105,7 @@ const App = () => {
       setLoading(true);
       const result = await getConnectedApplications();
       if (result.isSuccess && result.data.length > 0) {
+        console.log('result', result);
         const updatedApps = result.data.map((app) => {
           const isConnected = app.accessToken ? true : false;
 
