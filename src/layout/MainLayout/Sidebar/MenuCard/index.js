@@ -11,6 +11,7 @@ import {
   List,
   ListItem,
   ListItemAvatar,
+  Button,
   ListItemText,
   Typography,
   linearProgressClasses
@@ -18,6 +19,8 @@ import {
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import { useState } from 'react';
+import Subscription from 'views/pages/subscription/Subscription';
 
 // styles
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -83,42 +86,60 @@ LinearProgressWithLabel.propTypes = {
 
 const MenuCard = () => {
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <CardStyle>
-      <CardContent sx={{ p: 2 }}>
-        <List sx={{ p: 0, m: 0 }}>
-          <ListItem alignItems="flex-start" disableGutters sx={{ p: 0 }}>
-            <ListItemAvatar sx={{ mt: 0 }}>
-              <Avatar
-                variant="rounded"
-                sx={{
-                  ...theme.typography.commonAvatar,
-                  ...theme.typography.largeAvatar,
-                  color: theme.palette.primary.main,
-                  border: 'none',
-                  borderColor: theme.palette.primary.main,
-                  background: '#fff',
-                  marginRight: '12px'
-                }}
-              >
-                <TableChartOutlinedIcon fontSize="inherit" />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              sx={{ mt: 0 }}
-              primary={
-                <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
-                  Upgrade
-                </Typography>
-              }
-              secondary={<Typography variant="caption"> 8000/10000 Tokens</Typography>}
-            />
-          </ListItem>
-        </List>
-        <LinearProgressWithLabel value={80} />
-      </CardContent>
-    </CardStyle>
+    <>
+      <CardStyle>
+        <CardContent sx={{ p: 2 }}>
+          <List sx={{ p: 0, m: 0 }}>
+            <ListItem alignItems="flex-start" disableGutters sx={{ p: 0 }}>
+              <ListItemAvatar sx={{ mt: 0 }}>
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    ...theme.typography.commonAvatar,
+                    ...theme.typography.largeAvatar,
+                    color: theme.palette.primary.main,
+                    border: 'none',
+                    borderColor: theme.palette.primary.main,
+                    background: '#fff',
+                    marginRight: '12px'
+                  }}
+                >
+                  <TableChartOutlinedIcon fontSize="inherit" />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                sx={{ mt: 0 }}
+                primary={
+                  <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
+                    Basic Plan
+                  </Typography>
+                }
+                secondary={<Typography variant="caption"> 8000/10000 Tokens</Typography>}
+              />
+            </ListItem>
+          </List>
+
+          <Button
+            onClick={() => {
+              setOpen(true);
+            }}
+            variant="outlined"
+            color="primary"
+            sx={{ boxShadow: 'none', width: '100%', mt: 2, borderRadius: 10 }}
+          >
+            Go Premium
+          </Button>
+        </CardContent>
+      </CardStyle>
+      <Subscription open={open} handleClose={handleClose} />
+    </>
   );
 };
 

@@ -14,7 +14,7 @@ const Applications = () => {
           const isConnected = app.accessToken ? true : false;
 
           if (isConnected) {
-            localStorage.setItem(`accessToken`, app.accessToken);
+            // localStorage.setItem(`accessToken`, app.accessToken);
           }
 
           return { ...app, isConnected };

@@ -1,6 +1,8 @@
 // color variants
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 @import 'themes-vars.module.scss';
-
 // third-party
 @import '~react-perfect-scrollbar/dist/css/styles.css';
 

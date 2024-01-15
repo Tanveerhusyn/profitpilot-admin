@@ -23,11 +23,10 @@ const Logo = () => {
       style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        
+        justifyContent: 'center'
       }}
     >
-      <img src={logo} alt="Logo" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
+      <img src={logo} alt="Logo" style={{ width: '170px', height: 'auto', marginRight: '10px' }} />
       {/* <h2 style={{ margin: '0' }}>ProfitPilot</h2> */}
     </div>
     // <svg width="92" height="32" viewBox="0 0 92 32" fill="none" xmlns="http://www.w3.org/2000/svg">

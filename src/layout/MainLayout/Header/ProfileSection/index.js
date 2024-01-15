@@ -45,7 +45,7 @@ const ProfileSection = () => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
@@ -102,9 +102,9 @@ const ProfileSection = () => {
           borderColor: theme.palette.primary.light,
           backgroundColor: theme.palette.primary.light,
           '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.primary.main,
-            background: `${theme.palette.primary.main}!important`,
-            color: theme.palette.primary.light,
+            borderColor: '#061A2A',
+            background: `#061A2A !important`,
+            color: 'white',
             '& svg': {
               stroke: theme.palette.primary.light
             }

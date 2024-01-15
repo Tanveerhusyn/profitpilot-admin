@@ -72,11 +72,14 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
+            localStorage.removeItem('user');
+            localStorage.removeItem('accessToken');
             const response = await login(values.email, values.password);
             console.log('RESPONE', response);
             if (response.isSuccess == true) {
               console.log('Navigating to /login', response.data);
-              localStorage.setItem('user', response.data.user);
+              localStorage.setItem('user', JSON.stringify(response.data.user));
+              localStorage.setItem('accessToken', response.data.accessToken);
               dispatch(loginSuccess(response.data.user));
               navigate('/');
             } else {

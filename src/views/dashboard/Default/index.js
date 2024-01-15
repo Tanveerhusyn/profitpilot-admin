@@ -20,7 +20,9 @@ const Dashboard = () => {
   const [profitLossData, setProfitLossData] = useState({});
   const [summaryLoading, setSummaryLoading] = useState(true);
   const [executiveSummary, setExecutiveSummary] = useState({});
-  const isAppConnected = localStorage.getItem('accessToken') ? true : false;
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const isAppConnected = user && user.connectedApplications?.length > 0;
   useEffect(() => {
     setLoading(false);
     const profitLoss = async () => {
@@ -50,8 +52,10 @@ const Dashboard = () => {
       }
     };
     // do not load chart when loading
-    profitLoss();
-    executiveSummary();
+    if (user) {
+      profitLoss();
+      executiveSummary();
+    }
   }, []);
 
   return (

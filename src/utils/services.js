@@ -8,10 +8,12 @@ const API_ENDPOINTS = {
   getCashFlow: '/cash-flow',
   profitloss: '/profit-loss',
   executiveSummary: '/executive-summary',
-  chat: '/chat'
+  chat: '/chat',
+  currentUser: '/user'
 };
 
 const headers = {
+  authorization: 'Bearer ' + localStorage.getItem('accessToken'),
   'ngrok-skip-browser-warning': 69420
 };
 
@@ -38,16 +40,26 @@ export const signup = async (fullname, email, password) => {
 
   return isSuccess;
 };
-export const xeroAuth = async () => {
+export const xeroAuth = async (token) => {
   let isSuccess = true;
+  let data;
   try {
-    await axios.get(`${environments.apiUrl}${API_ENDPOINTS.xeroauth}`, { headers: headers });
+    const response = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.xeroauth}`, {
+      headers: {
+        authorization: 'Bearer ' + token
+      }
+    });
+    if (response.status == 200) {
+      isSuccess = true;
+      console.log('result', response);
+      data = response.data;
+    }
   } catch (error) {
     console.log(error.message);
     isSuccess = false;
   }
 
-  return isSuccess;
+  return { isSuccess: isSuccess, data: data };
 };
 export const login = async (email, password) => {
   let isSuccess = false;
@@ -59,11 +71,28 @@ export const login = async (email, password) => {
     };
     console.log(apiPayload);
     const result = await axios.post(`${environments.apiUrl}${API_ENDPOINTS.login}`, apiPayload, { headers: headers });
-    console.log(result.data);
     const response_data = result.data;
     if (response_data.status === 'success') {
       isSuccess = true;
       data = response_data;
+    }
+    console.log(response_data.message);
+  } catch (error) {
+    console.log(error.message);
+    isSuccess = false;
+  }
+
+  return { isSuccess, data };
+};
+export const getCurrentUser = async () => {
+  let isSuccess = false;
+  let data = {};
+  try {
+    const result = await axios.get(`${environments.apiUrl}${API_ENDPOINTS.currentUser}`, { headers: headers });
+    const response_data = result.data;
+    if (response_data.status === 200) {
+      isSuccess = true;
+      data = response_data.data;
     }
     console.log(response_data.message);
   } catch (error) {
