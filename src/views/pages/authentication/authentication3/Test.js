@@ -70,11 +70,11 @@ const FileUpload = () => {
   return (
     <div>
       <div>
-        <label>Video File:</label>
+        <p>Video File:</p>
         <input type="file" accept="video/*" onChange={(e) => handleFileChange(e, 'video')} />
       </div>
       <div>
-        <label>Generic File:</label>
+        <p>Generic File:</p>
         <input type="file" onChange={(e) => handleFileChange(e, 'generic')} />
       </div>
       <button onClick={handleUpload}>Upload Files</button>
