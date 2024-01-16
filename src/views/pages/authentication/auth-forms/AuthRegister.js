@@ -212,7 +212,22 @@ const FirebaseRegister = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="secondary">
+                <Button
+                  style={{
+                    background: '#F4CE24',
+                    color: 'black',
+                    borderRadius: '10px',
+                    height: '40px',
+                    padding: '5px 15px',
+                    width: '100%'
+                  }}
+                  disableElevation
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  color="secondary"
+                >
                   Sign up
                 </Button>
               </AnimateButton>

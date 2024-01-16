@@ -14,7 +14,7 @@ import { gridSpacing } from 'store/constant';
 import { CloseOutlined } from '@mui/icons-material';
 import { chat } from 'utils/services';
 import { useLocation } from 'react-router';
-import logo from '../../assets/images/ask.svg'
+import logo from '../../assets/images/ask.svg';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -54,7 +54,7 @@ const Customization = () => {
       const response = await chat(message);
 
       if (response.isSuccess) {
-        const parsed = JSON.parse(response.data[1]);
+        const parsed = response.data && JSON.parse(response.data[1]);
         console.log('data', parsed);
         setIsLoadingResponse(false);
 
@@ -162,28 +162,27 @@ const Customization = () => {
       >
         {/* Right Chatbox */}
         <Grid item xs={12} component={Paper} elevation={3} sx={{ p: 0, borderRadius: 0, minWidth: '100%' }}>
-          <Grid container spacing={gridSpacing} sx={{ p: 2, m: 0, height: '100%', width: '100%',overflow: 'hidden', }}>
+          <Grid container spacing={gridSpacing} sx={{ p: 2, m: 0, height: '100%', width: '100%', overflow: 'hidden' }}>
             {/* Display active thread's history */}
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                
+
                 alignItems: 'center',
                 minWidth: '100%'
               }}
             >
-           <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        
-      }}
-    >
-      <img src={logo} alt="Logo" style={{ width: '150px', height: '80px', marginRight: '10px' }} />
-      {/* <h2 style={{ margin: '0' }}>ProfitPilot</h2> */}
-    </div>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <img src={logo} alt="Logo" style={{ width: '150px', height: '80px', marginRight: '10px' }} />
+                {/* <h2 style={{ margin: '0' }}>ProfitPilot</h2> */}
+              </div>
 
               <IconButton edge="end" color="inherit" onClick={handleToggle} aria-label="fullscreen" sx={{ marginRight: 2 }}>
                 <CloseOutlined />
@@ -263,8 +262,8 @@ const Customization = () => {
                 justifyContent: 'left',
                 alignItems: 'center',
                 position: 'absolute',
-                background:'#fff',
-                height:'100px',
+                background: '#fff',
+                height: '100px',
                 bottom: 0,
                 zIndex: 999,
                 width: '98%',
@@ -289,24 +288,25 @@ const Customization = () => {
                   }
                 }}
               />
-              <div style={{
-                minWidth:'100px',
-                height:'100px',
-                display:'flex',
-                justifyContent:'center',
-                alignItems:'center'
-
-              }}>
-                <IconButton 
-              sx={{ background: '#061A2A', color: '#000',height:'60px',width:'60px' }}
-              onClick={()=>{
-                handleSendMessage(query);
-                setQuery('')
-              }}>
-                <IconSend color="white" sx={{background:'white', color: 'white'}} />
-              </IconButton>
+              <div
+                style={{
+                  minWidth: '100px',
+                  height: '100px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <IconButton
+                  style={{ background: '#061A2A', color: '#000', height: '60px', width: '60px' }}
+                  onClick={() => {
+                    handleSendMessage(query);
+                    setQuery('');
+                  }}
+                >
+                  <IconSend color="white" sx={{ background: 'white', color: 'white' }} />
+                </IconButton>
               </div>
-               
             </div>
           </Grid>
         </Grid>
