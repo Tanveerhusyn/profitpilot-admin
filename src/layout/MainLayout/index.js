@@ -239,7 +239,7 @@ const MainLayout = () => {
     dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
   };
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'));
   console.log('USER', user);
   const isAppConnected = user && user.connectedApplications.length > 0;
 

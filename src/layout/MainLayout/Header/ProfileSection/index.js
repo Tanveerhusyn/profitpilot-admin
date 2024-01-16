@@ -45,7 +45,7 @@ const ProfileSection = () => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user'));
   const dispatch = useDispatch();
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
