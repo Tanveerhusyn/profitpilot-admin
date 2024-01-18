@@ -57,13 +57,13 @@ const Header = () => {
         </ButtonBase> */}
       </Box>
 
-<Divider orientation="vertical" flexItem />
+      <Divider orientation="vertical" flexItem />
 
       {/* header search */}
       {/* <SearchSection /> */}
       {/* <Box sx={{ flexGrow: 1 }} /> */}
       <Box sx={{ flexGrow: 1 }} />
-<Divider orientation="vertical" flexItem />
+      <Divider orientation="vertical" flexItem />
 
       {/* notification & profile */}
       <NotificationSection />
